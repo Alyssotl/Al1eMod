@@ -1,0 +1,17 @@
+[
+  {
+    "modid": "al1e",
+    "name": "Al1e",
+    "description": "Mod which helps Al1e with her videos.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "updateUrl": "https://github.com/Alyssotl/Al1e",
+    "authorList": [
+      "Alyssotl"
+    ],
+    "credits": "Al1e",
+    "screenshots": [],
+    "dependencies": [],
+    "logoFile": "assets/al1e/logo.png"
+  }
+]
