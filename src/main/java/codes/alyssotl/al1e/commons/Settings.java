@@ -18,8 +18,6 @@ public class Settings {
     public static final String DEFAULT_DEATH_MESSAGE = "";
     public static final String DEFAULT_WIN_MESSAGE = "";
     public static final String DEFAULT_LOSE_MESSAGE = "";
-    public static final String DEFAULT_OWN_BED_BROKEN_MESSAGE = "";
-    public static final String DEFAULT_OTHER_BED_BROKEN_MESSAGE = "";
 
     /**
      * Message for the kill event
@@ -45,22 +43,21 @@ public class Settings {
     @SelectKey("loseMessage")
     public static final SelectionHolder<String> LOSE_MESSAGE = new SelectionHolder<>(DEFAULT_LOSE_MESSAGE);
 
-
-    /**
-     * Message for the ownBedBroken event
-     */
-    @SelectKey("ownBedBrokenMessage")
-    public static final SelectionHolder<String> OWN_BED_BROKEN_MESSAGE = new SelectionHolder<>(DEFAULT_OWN_BED_BROKEN_MESSAGE);
-
-    /**
-     * Message for the otherBedBroken event
-     */
-    @SelectKey("otherBedBrokenMessage")
-    public static final SelectionHolder<String> OTHER_BED_BROKEN_MESSAGE = new SelectionHolder<>(DEFAULT_OTHER_BED_BROKEN_MESSAGE);
-
     /**
      * Whether the mod should send updates or check for them
      */
     @SelectKey("sendUpdates")
     public static final SelectionHolder<Boolean> SEND_UPDATES = new SelectionHolder<>(true);
+
+    /**
+     * Name of the current player
+     */
+    @SelectKey("currentPlayer")
+    public static final SelectionHolder<String> CURRENT_PLAYER = new SelectionHolder<>("Al1e");
+
+    /**
+     * Current message sound
+     */
+    @SelectKey("currentSound")
+    public static final SelectionHolder<String> MESSAGE_SOUND = new SelectionHolder<>("mob.cat.meow");
 }

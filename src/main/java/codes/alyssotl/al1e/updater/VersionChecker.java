@@ -35,7 +35,7 @@ public class VersionChecker {
      * Initiates a new version checker
      */
     public VersionChecker() {
-        checkerURL = "https://raw.githubusercontent.com/ReflxctionDev/" + Reference.REPOSITORY_NAME + "/master/version.json";
+        checkerURL = "https://raw.githubusercontent.com/Alyssotl/" + Reference.REPOSITORY_NAME + "/master/version.json";
     }
 
     /**

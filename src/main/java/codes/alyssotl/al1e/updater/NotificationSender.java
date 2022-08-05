@@ -3,10 +3,10 @@ package codes.alyssotl.al1e.updater;
 import codes.alyssotl.al1e.Al1eMod;
 import codes.alyssotl.al1e.commands.Al1eCommand;
 import codes.alyssotl.al1e.commons.Settings;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
 import codes.alyssotl.al1e.utils.Reference;
 import codes.alyssotl.al1e.utils.SimpleSender;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -28,7 +28,7 @@ public class NotificationSender {
                 @Override
                 public void run() {
                     if (Al1eMod.INSTANCE.getChecker().isUpdateAvailable()) {
-                        SimpleSender.send("&eAn update is available for &b%s&e! To update, do &a/%s update&e.", Reference.NAME, Al1eCommand.COMMAND_NAME);
+                        SimpleSender.send("&eAn update is available for &b" + Reference.NAME + "&e! To update, do &a/" + Al1eCommand.COMMAND_NAME + " update&e.");
                         sent = true;
                     }
                 }

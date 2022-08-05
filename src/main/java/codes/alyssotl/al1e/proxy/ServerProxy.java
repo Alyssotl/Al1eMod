@@ -52,5 +52,4 @@ public class ServerProxy implements IProxy {
     public void serverStarting(FMLServerStartingEvent event) {
         event.registerServerCommand(new Al1eCommand());
     }
-
 }

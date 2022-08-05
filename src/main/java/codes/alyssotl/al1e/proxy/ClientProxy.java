@@ -60,5 +60,4 @@ public class ClientProxy implements IProxy {
     public void serverStarting(FMLServerStartingEvent event) {
         event.registerServerCommand(new Al1eCommand());
     }
-
 }

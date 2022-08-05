@@ -19,7 +19,6 @@ package codes.alyssotl.al1e.utils;
  * Class which contains mod information.
  */
 public class Reference {
-
     // Mod ID (for Forge initialization)
     public static final String MOD_ID = "al1e";
 

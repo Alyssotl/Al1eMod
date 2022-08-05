@@ -1,15 +1,17 @@
 package codes.alyssotl.al1e;
 
 import codes.alyssotl.al1e.commons.Settings;
+import codes.alyssotl.al1e.events.ChatEvents;
 import codes.alyssotl.al1e.proxy.IProxy;
 import codes.alyssotl.al1e.updater.UpdateManager;
+import codes.alyssotl.al1e.updater.VersionChecker;
+import codes.alyssotl.al1e.utils.Reference;
 import net.minecraft.client.Minecraft;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
-import codes.alyssotl.al1e.updater.VersionChecker;
-import codes.alyssotl.al1e.utils.Reference;
 import net.reflxction.simplejson.configuration.select.SelectableConfiguration;
 import net.reflxction.simplejson.json.JsonFile;
 
@@ -80,6 +82,7 @@ public class Al1eMod {
     @EventHandler
     public void onFMLInitialization(FMLInitializationEvent event) {
         PROXY.init(event);
+        MinecraftForge.EVENT_BUS.register(new ChatEvents());
     }
 
     /**
@@ -121,5 +124,4 @@ public class Al1eMod {
     public VersionChecker getChecker() {
         return checker;
     }
-
 }

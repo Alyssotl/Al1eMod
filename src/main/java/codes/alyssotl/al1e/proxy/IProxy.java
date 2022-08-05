@@ -38,5 +38,4 @@ public interface IProxy {
      * @param event the event
      */
     void serverStarting(FMLServerStartingEvent event);
-
 }
