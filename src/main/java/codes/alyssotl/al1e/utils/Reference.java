@@ -38,5 +38,5 @@ public class Reference {
     public static final String REPOSITORY_NAME = "Al1eMod";
 
     // The JAR name of the mod
-    public static final String JAR_NAME = REPOSITORY_NAME + "-" + VERSION;
+    public static final String JAR_NAME = "Al1e-" + VERSION;
 }

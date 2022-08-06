@@ -59,7 +59,7 @@ public class UpdateManager {
                 "/" +
                 version +
                 "/" +
-                Reference.REPOSITORY_NAME +
+                Reference.JAR_NAME +
                 "-" +
                 version +
                 ".jar";
