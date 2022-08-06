@@ -7,6 +7,7 @@ import codes.alyssotl.al1e.utils.Reference;
 import codes.alyssotl.al1e.utils.SimpleSender;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.BlockPos;
@@ -17,7 +18,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Class which handles command input for "/example"
+ * Class which handles command input for "/al1e"
  */
 public class Al1eCommand implements ICommand {
 
@@ -41,6 +42,11 @@ public class Al1eCommand implements ICommand {
      */
     private static final List<String> TABS = Arrays.asList("toggle", "check", "update", "event", "reset", "info", "player", "sound");
 
+    /**
+     * Returns "&cNone" if the String is empty, else returns the String
+     *
+     * @param string The String to check
+     */
     private String ifEmptyNone(String string) {
         if (Objects.equals(string, "")) {
             return "&cNone";
@@ -49,6 +55,11 @@ public class Al1eCommand implements ICommand {
         }
     }
 
+    /**
+     * Returns a String concatenation of all arguments in an array of Strings after, and including, the 2nd index
+     *
+     * @param args The array of Strings to concatenate
+     */
     private String fromArgsAfterIndex(String[] args) {
         StringBuilder builder = new StringBuilder();
         for (int i = 2; i < args.length; i++) {
@@ -123,21 +134,21 @@ public class Al1eCommand implements ICommand {
                         SimpleSender.send(Settings.SEND_UPDATES.get() ? "&aYou will be notified on updates" : "&cYou will no longer be notified on updates");
                         break;
                     case "event":
-                        SimpleSender.send("&cPlease provide an event name <kill/death/win/lose>");
+                        SimpleSender.send("&cPlease provide an event name <kill/death/win/loss>");
                         break;
                     case "reset":
                         SimpleSender.send("&aReset to default values");
                         Settings.KILL_MESSAGE.set(Settings.DEFAULT_KILL_MESSAGE);
                         Settings.DEATH_MESSAGE.set(Settings.DEFAULT_DEATH_MESSAGE);
                         Settings.WIN_MESSAGE.set(Settings.DEFAULT_WIN_MESSAGE);
-                        Settings.LOSE_MESSAGE.set(Settings.DEFAULT_LOSE_MESSAGE);
+                        Settings.LOSS_MESSAGE.set(Settings.DEFAULT_LOSS_MESSAGE);
                         break;
                     case "info":
                         SimpleSender.send("&aCurrent messages per event:");
                         SimpleSender.sendNoPrefix("&r &8- &aKill: &r" + ifEmptyNone(Settings.KILL_MESSAGE.get()));
                         SimpleSender.sendNoPrefix("&r &8- &aDeath: &r" + ifEmptyNone(Settings.DEATH_MESSAGE.get()));
                         SimpleSender.sendNoPrefix("&r &8- &aWin: &r" + ifEmptyNone(Settings.WIN_MESSAGE.get()));
-                        SimpleSender.sendNoPrefix("&r &8- &aLose: &r" + ifEmptyNone(Settings.LOSE_MESSAGE.get()));
+                        SimpleSender.sendNoPrefix("&r &8- &aLoss: &r" + ifEmptyNone(Settings.LOSS_MESSAGE.get()));
                         break;
                     case "player":
                         Settings.CURRENT_PLAYER.set(Minecraft.getMinecraft().thePlayer.getName());
@@ -145,6 +156,9 @@ public class Al1eCommand implements ICommand {
                         break;
                     case "sound":
                         SimpleSender.send("&aCurrent sound: " + Settings.MESSAGE_SOUND.get());
+                        EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
+                        if (player == null) return; // <- For safety
+                        player.playSound(Settings.MESSAGE_SOUND.get(), 1, 1);
                         break;
                     default:
                         SimpleSender.send("&cIncorrect command usage. Try &8" + getCommandUsage(sender));
@@ -152,51 +166,68 @@ public class Al1eCommand implements ICommand {
                 }
                 break;
             case 2:
-                if ("event".equals(args[0])) {
-                    switch(args[1]) {
-                        case "kill":
-                            SimpleSender.send("&aCurrent kill message: " + ifEmptyNone(Settings.KILL_MESSAGE.get()));
-                            break;
-                        case "death":
-                            SimpleSender.send("&aCurrent death message: " + ifEmptyNone(Settings.DEATH_MESSAGE.get()));
-                            break;
-                        case "win":
-                            SimpleSender.send("&aCurrent win message: " + ifEmptyNone(Settings.WIN_MESSAGE.get()));
-                            break;
-                        case "lose":
-                            SimpleSender.send("&aCurrent lose message: " + ifEmptyNone(Settings.LOSE_MESSAGE.get()));
-                            break;
-                        default:
-                            SimpleSender.send("&cUnknown event: &8" + args[1]);
-                            break;
-                    }
-                } else if ("reset".equals(args[0])) {
-                    switch(args[1]) {
-                        case "kill":
-                            Settings.KILL_MESSAGE.set(Settings.DEFAULT_KILL_MESSAGE);
-                            SimpleSender.send("&aReset kill message to default");
-                            break;
-                        case "death":
-                            Settings.DEATH_MESSAGE.set(Settings.DEFAULT_DEATH_MESSAGE);
-                            SimpleSender.send("&aReset death message to default");
-                            break;
-                        case "win":
-                            Settings.WIN_MESSAGE.set(Settings.DEFAULT_WIN_MESSAGE);
-                            SimpleSender.send("&aReset win message to default");
-                            break;
-                        case "lose":
-                            Settings.LOSE_MESSAGE.set(Settings.DEFAULT_LOSE_MESSAGE);
-                            SimpleSender.send("&aReset lose message to default");
-                            break;
-                        default:
-                            SimpleSender.send("&cUnknown event: &8" + args[1]);
-                            break;
-                    }
-                } else if ("sound".equals(args[0])) {
-                    Settings.MESSAGE_SOUND.set(args[1]);
-                    SimpleSender.send("&aUpdated current sound to " + Settings.MESSAGE_SOUND.get());
-                } else {
-                    SimpleSender.send("&cIncorrect command usage. Try &8" + getCommandUsage(sender));
+                switch (args[0]) {
+                    case "event":
+                        switch (args[1]) {
+                            case "kill":
+                                SimpleSender.send("&aCurrent kill message: " + ifEmptyNone(Settings.KILL_MESSAGE.get()));
+                                break;
+                            case "death":
+                                SimpleSender.send("&aCurrent death message: " + ifEmptyNone(Settings.DEATH_MESSAGE.get()));
+                                break;
+                            case "win":
+                                SimpleSender.send("&aCurrent win message: " + ifEmptyNone(Settings.WIN_MESSAGE.get()));
+                                break;
+                            case "loss":
+                                SimpleSender.send("&aCurrent loss message: " + ifEmptyNone(Settings.LOSS_MESSAGE.get()));
+                                break;
+                            default:
+                                SimpleSender.send("&cUnknown event: &8" + args[1]);
+                                break;
+                        }
+                        break;
+                    case "reset":
+                        switch (args[1]) {
+                            case "kill":
+                                Settings.KILL_MESSAGE.set(Settings.DEFAULT_KILL_MESSAGE);
+                                SimpleSender.send("&aReset kill message to default");
+                                break;
+                            case "death":
+                                Settings.DEATH_MESSAGE.set(Settings.DEFAULT_DEATH_MESSAGE);
+                                SimpleSender.send("&aReset death message to default");
+                                break;
+                            case "win":
+                                Settings.WIN_MESSAGE.set(Settings.DEFAULT_WIN_MESSAGE);
+                                SimpleSender.send("&aReset win message to default");
+                                break;
+                            case "loss":
+                                Settings.LOSS_MESSAGE.set(Settings.DEFAULT_LOSS_MESSAGE);
+                                SimpleSender.send("&aReset loss message to default");
+                                break;
+                            case "sound":
+                                Settings.MESSAGE_SOUND.set(Settings.DEFAULT_MESSAGE_SOUND);
+                                SimpleSender.send("&aReset sound to default");
+                                break;
+                            default:
+                                SimpleSender.send("&cUnknown field or event: &8" + args[1]);
+                                break;
+                        }
+                        break;
+                    case "sound":
+                        Settings.MESSAGE_SOUND.set(args[1]);
+                        EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
+                        if (player == null) return; // <- For safety
+                        try {
+                            player.playSound(Settings.MESSAGE_SOUND.get(), 1, 1);
+                        } catch (Exception e) {
+                            SimpleSender.send("&cInvalid sound: &8" + args[1]);
+                        }
+
+                        SimpleSender.send("&aUpdated current sound to " + Settings.MESSAGE_SOUND.get());
+                        break;
+                    default:
+                        SimpleSender.send("&cIncorrect command usage. Try &8" + getCommandUsage(sender));
+                        break;
                 }
                 break;
             default:
@@ -215,9 +246,9 @@ public class Al1eCommand implements ICommand {
                             SimpleSender.send("&aShow every &8win&a event: &r" + message);
                             Settings.WIN_MESSAGE.set(message);
                             break;
-                        case "lose":
-                            SimpleSender.send("&aShow every &8lose&a event: &r" + message);
-                            Settings.LOSE_MESSAGE.set(message);
+                        case "loss":
+                            SimpleSender.send("&aShow every &8loss&a event: &r" + message);
+                            Settings.LOSS_MESSAGE.set(message);
                             break;
                         default:
                             SimpleSender.send("&cUnknown event: &8" + args[1]);

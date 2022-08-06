@@ -21,5 +21,4 @@ public class Multithreading {
     public static void runAsync(Runnable task) {
         Multithreading.SERVICE.execute(task);
     }
-
 }

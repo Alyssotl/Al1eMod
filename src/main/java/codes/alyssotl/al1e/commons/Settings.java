@@ -14,10 +14,30 @@ public class Settings {
     @SelectKey("enabled")
     public static final SelectionHolder<Boolean> ENABLED = new SelectionHolder<>(true);
 
+    /**
+     * The default message for the kill event
+     */
     public static final String DEFAULT_KILL_MESSAGE = "";
+
+    /**
+     * The default message for the death event
+     */
     public static final String DEFAULT_DEATH_MESSAGE = "";
+
+    /**
+     * The default message for the win event
+     */
     public static final String DEFAULT_WIN_MESSAGE = "";
-    public static final String DEFAULT_LOSE_MESSAGE = "";
+
+    /**
+     * The default message for the loss event
+     */
+    public static final String DEFAULT_LOSS_MESSAGE = "";
+
+    /**
+     * The default message sound
+     */
+    public static final String DEFAULT_MESSAGE_SOUND = "mob.cat.meow";
 
     /**
      * Message for the kill event
@@ -38,10 +58,10 @@ public class Settings {
     public static final SelectionHolder<String> WIN_MESSAGE = new SelectionHolder<>(DEFAULT_WIN_MESSAGE);
 
     /**
-     * Message for the lose event
+     * Message for the loss event
      */
-    @SelectKey("loseMessage")
-    public static final SelectionHolder<String> LOSE_MESSAGE = new SelectionHolder<>(DEFAULT_LOSE_MESSAGE);
+    @SelectKey("lossMessage")
+    public static final SelectionHolder<String> LOSS_MESSAGE = new SelectionHolder<>(DEFAULT_LOSS_MESSAGE);
 
     /**
      * Whether the mod should send updates or check for them

@@ -1,13 +1,11 @@
 package codes.alyssotl.al1e;
 
 import codes.alyssotl.al1e.commons.Settings;
-import codes.alyssotl.al1e.events.ChatEvents;
 import codes.alyssotl.al1e.proxy.IProxy;
 import codes.alyssotl.al1e.updater.UpdateManager;
 import codes.alyssotl.al1e.updater.VersionChecker;
 import codes.alyssotl.al1e.utils.Reference;
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -27,7 +25,9 @@ import java.io.File;
         acceptedMinecraftVersions = Reference.ACCEPTED_VERSIONS
 )
 public class Al1eMod {
-
+    /**
+     * Instance of the mod
+     */
     public static final Al1eMod INSTANCE = new Al1eMod();
 
     /**
@@ -38,12 +38,8 @@ public class Al1eMod {
 
     // Assign proxies of the mod
     @SidedProxy(
-
             // Client side proxy
-            clientSide = Reference.CLIENT_PROXY,
-
-            // Server side proxy
-            serverSide = Reference.SERVER_PROXY
+            clientSide = Reference.CLIENT_PROXY
     )
     private static IProxy PROXY;
 
@@ -82,7 +78,6 @@ public class Al1eMod {
     @EventHandler
     public void onFMLInitialization(FMLInitializationEvent event) {
         PROXY.init(event);
-        MinecraftForge.EVENT_BUS.register(new ChatEvents());
     }
 
     /**
@@ -104,6 +99,7 @@ public class Al1eMod {
      */
     @EventHandler
     public void onFMLServerStarting(FMLServerStartingEvent event) {
+
         PROXY.serverStarting(event);
     }
 
@@ -113,6 +109,7 @@ public class Al1eMod {
      * @return An instance of the mod update manager
      */
     public UpdateManager getUpdateManager() {
+
         return updateManager;
     }
 
@@ -122,6 +119,7 @@ public class Al1eMod {
      * @return The mod's version checker
      */
     public VersionChecker getChecker() {
+
         return checker;
     }
 }

@@ -34,9 +34,6 @@ public class Reference {
     // Client proxy handler
     public static final String CLIENT_PROXY = "codes.alyssotl.al1e.proxy.ClientProxy";
 
-    // Server proxy handler
-    public static final String SERVER_PROXY = "codes.alyssotl.al1e.proxy.ServerProxy";
-
     // The Git Repository name
     public static final String REPOSITORY_NAME = "Al1eMod";
 

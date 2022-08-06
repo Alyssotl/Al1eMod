@@ -1,5 +1,6 @@
 package codes.alyssotl.al1e.proxy;
 
+import codes.alyssotl.al1e.events.ChatEvents;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.*;
@@ -36,6 +37,7 @@ public class ClientProxy implements IProxy {
     @Override
     public void init(FMLInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new NotificationSender());
+        MinecraftForge.EVENT_BUS.register(new ChatEvents());
     }
 
     /**
@@ -57,7 +59,5 @@ public class ClientProxy implements IProxy {
      * @param event Forge's server starting event
      */
     @Override
-    public void serverStarting(FMLServerStartingEvent event) {
-        event.registerServerCommand(new Al1eCommand());
-    }
+    public void serverStarting(FMLServerStartingEvent event) {}
 }
