@@ -1,10 +1,13 @@
 package codes.alyssotl.al1e.updater;
 
 import codes.alyssotl.al1e.Al1eMod;
-import codes.alyssotl.al1e.commands.Al1eCommand;
 import codes.alyssotl.al1e.commons.Settings;
 import codes.alyssotl.al1e.utils.Reference;
-import codes.alyssotl.al1e.utils.SimpleSender;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.event.ClickEvent;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
 
@@ -28,7 +31,17 @@ public class NotificationSender {
                 @Override
                 public void run() {
                     if (Al1eMod.INSTANCE.getChecker().isUpdateAvailable()) {
-                        SimpleSender.send("&eAn update is available for &b" + Reference.NAME + "&e! To update, do &a/" + Al1eCommand.COMMAND_NAME + " update&e.");
+                        ChatComponentText testChat = new ChatComponentText("«!» An update is available for " + Reference.REPOSITORY_NAME + "! Click to update!");
+                        testChat.getChatStyle().setChatClickEvent(new ClickEvent(
+                            ClickEvent.Action.OPEN_URL, "https://github.com/Alyssotl/" + Reference.REPOSITORY_NAME + "/" + "releases" + "/" + Al1eMod.INSTANCE.getChecker().latestVersion
+                        ));
+                        testChat.getChatStyle().setColor(EnumChatFormatting.DARK_PURPLE);
+                        testChat.getChatStyle().setBold(true);
+
+                        EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
+                        if (player == null) return; // <- For safety
+                        player.addChatMessage(testChat);
+                        player.playSound("random.orb", 1, 1);
                         sent = true;
                     }
                 }

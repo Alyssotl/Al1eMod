@@ -23,14 +23,24 @@ import java.io.IOException;
 import static java.lang.Double.parseDouble;
 
 public class VersionChecker {
+    /**
+     * The latest version of the mod
+     */
+    public double latestVersion = parseDouble(Reference.VERSION);
 
-    // Whether an update is available or not
+    /**
+     * Whether an update is available or not
+     */
     private boolean updateAvailable = false;
 
-    // The current mod version, not necessarily the latest
+    /**
+     * The current mod version, not necessarily the latest
+     */
     private final double version = parseDouble(Reference.VERSION);
 
-    // The JSON file to get the latest version
+    /**
+     * The JSON file to get the latest version
+     */
     private final String checkerURL;
 
     /**
@@ -69,6 +79,7 @@ public class VersionChecker {
      * Updates the state of {@link #updateAvailable}
      */
     public void updateState() {
-        updateAvailable = getLatestVersion() > version;
+        latestVersion = getLatestVersion();
+        updateAvailable = latestVersion > version;
     }
 }

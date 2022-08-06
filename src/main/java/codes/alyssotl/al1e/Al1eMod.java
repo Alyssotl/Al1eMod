@@ -2,7 +2,6 @@ package codes.alyssotl.al1e;
 
 import codes.alyssotl.al1e.commons.Settings;
 import codes.alyssotl.al1e.proxy.IProxy;
-import codes.alyssotl.al1e.updater.UpdateManager;
 import codes.alyssotl.al1e.updater.VersionChecker;
 import codes.alyssotl.al1e.utils.Reference;
 import net.minecraft.client.Minecraft;
@@ -42,11 +41,6 @@ public class Al1eMod {
             clientSide = Reference.CLIENT_PROXY
     )
     private static IProxy PROXY;
-
-    /**
-     * The update manager
-     */
-    private final UpdateManager updateManager = new UpdateManager(false);
 
     /**
      * The version checker
@@ -101,16 +95,6 @@ public class Al1eMod {
     public void onFMLServerStarting(FMLServerStartingEvent event) {
 
         PROXY.serverStarting(event);
-    }
-
-    /**
-     * The mod update manager
-     *
-     * @return An instance of the mod update manager
-     */
-    public UpdateManager getUpdateManager() {
-
-        return updateManager;
     }
 
     /**

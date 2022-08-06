@@ -1,7 +1,5 @@
 package codes.alyssotl.al1e.commands;
 
-import codes.alyssotl.al1e.Al1eMod;
-import codes.alyssotl.al1e.commons.Multithreading;
 import codes.alyssotl.al1e.commons.Settings;
 import codes.alyssotl.al1e.utils.Reference;
 import codes.alyssotl.al1e.utils.SimpleSender;
@@ -30,7 +28,7 @@ public class Al1eCommand implements ICommand {
     /**
      * The usage of this command
      */
-    private static final String COMMAND_USAGE = "/al1e <toggle/check/update/event/reset/info/player/sound>";
+    private static final String COMMAND_USAGE = "/al1e <toggle/check/event/reset/info/player/sound>";
 
     /**
      * The aliases of the command
@@ -40,7 +38,7 @@ public class Al1eCommand implements ICommand {
     /**
      * The content which appears when the user TABs the command arguments
      */
-    private static final List<String> TABS = Arrays.asList("toggle", "check", "update", "event", "reset", "info", "player", "sound");
+    private static final List<String> TABS = Arrays.asList("toggle", "check", "event", "reset", "info", "player", "sound");
 
     /**
      * Returns "&cNone" if the String is empty, else returns the String
@@ -115,19 +113,6 @@ public class Al1eCommand implements ICommand {
                     case "toggle":
                         Settings.ENABLED.set(!Settings.ENABLED.get());
                         SimpleSender.send(Settings.ENABLED.get() ? "&a" + Reference.NAME + " has been enabled" : "&c" + Reference.NAME + " has been disabled");
-                        break;
-                    case "update":
-                        if (Al1eMod.INSTANCE.getChecker().isUpdateAvailable()) {
-                            Multithreading.runAsync(() -> {
-                                if (Al1eMod.INSTANCE.getUpdateManager().updateMod()) {
-                                    SimpleSender.send("&aSuccessfully updated the mod! Restart your game to see changes.");
-                                } else {
-                                    SimpleSender.send("&cFailed to update mod! To avoid any issues, delete the mod jar and install it manually again.");
-                                }
-                            });
-                        } else {
-                            SimpleSender.send("&cNo updates found. You're up to date!");
-                        }
                         break;
                     case "check":
                         Settings.SEND_UPDATES.set(!Settings.SEND_UPDATES.get());

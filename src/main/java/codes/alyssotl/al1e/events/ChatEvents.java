@@ -6,6 +6,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.Arrays;
+
 public class ChatEvents {
     /**
      * The current game type the user is in
@@ -67,7 +69,9 @@ public class ChatEvents {
 
             if (data.length != 1) {
                 boolean isFinalKill = data[1].contains("FINAL KILL!");
+                System.out.println("BEFORE: " + Arrays.toString(data));
                 data[1] = data[1].replace(" §r§b§lFINAL KILL!§r", "");
+                System.out.println("AFTER: " + Arrays.toString(data));
 
                 if (data[0].contains(currentPlayer)) {
                     // Player has died if a gray message starts with their name
