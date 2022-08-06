@@ -20,13 +20,15 @@ import net.reflxction.simplejson.json.JsonURLReader;
 
 import java.io.IOException;
 
+import static java.lang.Double.parseDouble;
+
 public class VersionChecker {
 
     // Whether an update is available or not
     private boolean updateAvailable = false;
 
     // The current mod version, not necessarily the latest
-    private final double version = Double.parseDouble(Reference.VERSION);
+    private final double version = parseDouble(Reference.VERSION);
 
     // The JSON file to get the latest version
     private final String checkerURL;
@@ -51,7 +53,7 @@ public class VersionChecker {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return 1.0;
+        return parseDouble(Reference.VERSION);
     }
 
     /**
