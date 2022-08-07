@@ -1,7 +1,10 @@
 package codes.alyssotl.al1e.commons;
 
+import codes.alyssotl.al1e.events.GameType;
 import net.reflxction.simplejson.configuration.select.SelectKey;
 import net.reflxction.simplejson.configuration.select.SelectionHolder;
+
+import java.util.Collection;
 
 /**
  * A class with all commons as constants
@@ -80,4 +83,28 @@ public class Settings {
      */
     @SelectKey("currentSound")
     public static final SelectionHolder<String> MESSAGE_SOUND = new SelectionHolder<>("mob.cat.meow");
+
+    /**
+     * Saved game type
+     */
+    @SelectKey("sessionGameType")
+    public static final SelectionHolder<GameType> SESSION_GAME_TYPE = new SelectionHolder<>(null);
+
+    /**
+     * Saved team color
+     */
+    @SelectKey("sessionTeamColor")
+    public static final SelectionHolder<String> SESSION_TEAM_COLOR = new SelectionHolder<>(null);
+
+    /**
+     * Saved players left
+     */
+    @SelectKey("sessionPlayersLeft")
+    public static final SelectionHolder<Integer> SESSION_PLAYERS_LEFT = new SelectionHolder<>(null);
+
+    /**
+     * Saved teammates
+     */
+    @SelectKey("sessionTeammates")
+    public static final SelectionHolder<Collection<String>> SESSION_TEAMMATES = new SelectionHolder<>(null);
 }

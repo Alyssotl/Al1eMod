@@ -24,6 +24,11 @@ public class NotificationSender {
      */
     private boolean sent;
 
+    /**
+     * Callback when the client connects to the server
+     *
+     * @param event The event which contains the message
+     */
     @SubscribeEvent
     public void onFMLNetworkClientConnectedToServer(ClientConnectedToServerEvent event) {
         if (!sent && Settings.SEND_UPDATES.get()) {
