@@ -1,17 +1,17 @@
 package codes.alyssotl.al1e.proxy;
 
-import codes.alyssotl.al1e.events.ChatEvents;
-import net.minecraftforge.client.ClientCommandHandler;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.event.*;
 import codes.alyssotl.al1e.Al1eMod;
 import codes.alyssotl.al1e.commands.Al1eCommand;
 import codes.alyssotl.al1e.commons.Multithreading;
 import codes.alyssotl.al1e.commons.Settings;
+import codes.alyssotl.al1e.events.ChatEvents;
+import codes.alyssotl.al1e.gui.TeamGui;
 import codes.alyssotl.al1e.updater.NotificationSender;
+import net.minecraftforge.client.ClientCommandHandler;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.event.*;
 
 public class ClientProxy implements IProxy {
-
     /**
      * Called before the mod is fully initialized
      * <p>
@@ -38,6 +38,7 @@ public class ClientProxy implements IProxy {
     public void init(FMLInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new NotificationSender());
         MinecraftForge.EVENT_BUS.register(new ChatEvents());
+        MinecraftForge.EVENT_BUS.register(new TeamGui());
     }
 
     /**

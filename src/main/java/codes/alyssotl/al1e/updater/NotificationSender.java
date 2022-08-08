@@ -38,7 +38,7 @@ public class NotificationSender {
                     if (Al1eMod.INSTANCE.getChecker().isUpdateAvailable()) {
                         ChatComponentText testChat = new ChatComponentText("«!» An update is available for " + Reference.REPOSITORY_NAME + "! Click to update!");
                         testChat.getChatStyle().setChatClickEvent(new ClickEvent(
-                            ClickEvent.Action.OPEN_URL, "https://github.com/Alyssotl/" + Reference.REPOSITORY_NAME + "/" + "releases" + "/" + Al1eMod.INSTANCE.getChecker().latestVersion
+                                ClickEvent.Action.OPEN_URL, "https://github.com/Alyssotl/" + Reference.REPOSITORY_NAME + "/" + "releases" + "/" + Al1eMod.INSTANCE.getChecker().latestVersion
                         ));
                         testChat.getChatStyle().setColor(EnumChatFormatting.DARK_PURPLE);
                         testChat.getChatStyle().setBold(true);

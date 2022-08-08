@@ -10,7 +10,6 @@ import java.util.Collection;
  * A class with all commons as constants
  */
 public class Settings {
-
     /**
      * Whether the mod is enabled or not
      */
@@ -103,7 +102,7 @@ public class Settings {
     public static final SelectionHolder<Integer> SESSION_PLAYERS_LEFT = new SelectionHolder<>(null);
 
     /**
-     * Saved teammates
+     * Saved teammate names
      */
     @SelectKey("sessionTeammates")
     public static final SelectionHolder<Collection<String>> SESSION_TEAMMATES = new SelectionHolder<>(null);

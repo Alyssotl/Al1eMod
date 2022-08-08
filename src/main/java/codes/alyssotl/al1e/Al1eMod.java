@@ -1,5 +1,6 @@
 package codes.alyssotl.al1e;
 
+import codes.alyssotl.al1e.commons.GameSession;
 import codes.alyssotl.al1e.commons.Settings;
 import codes.alyssotl.al1e.proxy.IProxy;
 import codes.alyssotl.al1e.updater.VersionChecker;
@@ -28,6 +29,7 @@ public class Al1eMod {
      * Instance of the mod
      */
     public static final Al1eMod INSTANCE = new Al1eMod();
+    public static final GameSession SESSION = new GameSession();
 
     /**
      * Config for saving data
